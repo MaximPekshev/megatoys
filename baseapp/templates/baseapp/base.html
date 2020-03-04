@@ -1,0 +1,230 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icon-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static 'css/helper.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/vendor/modernizr-3.7.1.min.js' %}"></script>
+</head>
+
+<body>
+
+<div class="main-wrapper">
+
+    <div class="header-section section">
+
+        <div class="header-top header-top-two bg-theme-one">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-center">
+
+                    <div class="col mt-10 mb-10 d-none d-md-flex">
+                        <div class="header-top-left header-top-left-two">
+                            <p>Интернет магазин "МАНЮНЯ"</p>
+                            <p><a href="tel:88007003352">8 800 700 33 52</a></p>
+                        </div>
+                    </div>
+
+                    <div class="col mt-10 mb-10">
+                        <ul class="header-lan-curr header-lan-curr-two">
+
+                        </ul>
+                    </div>
+
+                    <div class="col mt-10 mb-10">
+                        <div class="header-top-right header-top-right-two">
+
+                            {% if user.is_authenticated %}
+                            <p><a href="{% url 'show_account' %}">Привет, {{ user }}!</a>
+                            {% endif %}
+                           
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'logout' %}">Выйти</a></p>
+                            {% else %}
+                                <p><a href="{% url 'login_register' %}">Регистрация</a>
+                                <a href="{% url 'login_register' %}">Войти</a></p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom header-bottom-one header-sticky">
+            <div class="container-fluid">
+                <div class="row menu-center align-items-center justify-content-between">
+
+                    <div class="col mt-15 mb-15">
+                        <div class="header-logo">
+                            <a href="{% url 'show_index' %}">
+                                <img src="{% static 'images/logo.png' %}" alt="Jadusona">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col order-2 order-lg-3">
+                        <div class="header-shop-links">
+
+                            <div class="header-search">
+                                <button class="search-toggle"><img src="{% static 'images/icons/search.png' %}" alt="Search Toggle"><img class="toggle-close" src="{% static 'images/icons/close.png' %}" alt="Search Toggle"></button>
+                                <div class="header-search-wrap">
+                                    <form action="#">
+                                        <input type="text" placeholder="Type and hit enter">
+                                        <button><img src="{% static 'images/icons/search.png' %}" alt="Search"></button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="header-wishlist">
+                                <a href="#"><img src="{% static 'images/icons/wishlist.png' %}" alt="Wishlist"> <span>{% block num_of_wishlist %} {% endblock %}</span></a>
+                            </div>
+
+                            <div class="header-mini-cart">
+                                <a href="#"><img src="{% static 'images/icons/cart.png' %}" alt="Cart"> <span>{% block summ_of_order %} {% endblock %}</span></a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col order-3 order-lg-2">
+                        <div class="main-menu">
+                            <nav>
+                                <ul>
+
+                                    <li><a href="{% url 'show_catalog' %}">КАТАЛОГ</a>
+
+                                    </li>
+
+                                    <li><a href="{% url 'show_manufacture' %}">ПРОИЗВОДСТВО</a>
+                                       
+                                    </li>
+
+                                    <li><a href="{% url 'show_about_us' %}">О КОМПАНИИ</a>
+                                       
+                                    </li>
+
+                                    <li><a href="{% url 'show_certificate' %}">СЕРТИФИКАТЫ</a>
+                                       
+                                    </li>
+
+                                    <li><a href="{% url 'show_news' %}">НОВОСТИ</a>
+                                       
+                                    </li>
+                                    
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="mobile-menu order-12 d-block d-lg-none col"></div>
+
+                </div>
+            </div>
+        </div><
+    </div>
+
+    {% block content %}
+    <div class="page-banner-section section" style="background-image: url({% static 'images/hero/hero-1.jpg' %})">
+        <div class="container">
+            <div class="row">
+                <div class="page-banner-content col">
+                    <h1>{% block page_name %}{% endblock %}</h1>
+                    <ul class="page-breadcrumb">
+                        <li><a href="{% url 'show_index' %}">Главная</a></li>
+                        {% block breadcrumb %}{% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    
+    <div class="footer-top-section section bg-theme-one-light section-padding">
+        <div class="container">
+            <div class="row mbn-40">
+
+                <div class="footer-widget footer-widget-2 col-lg-3 col-md-6 col-12 mb-40">
+                    <h4 class="title">КОНТАКТЫ</h4>
+                    <p>г. Белгород, Михайловское шоссе, 31</p>
+                    <p><a href="tel:88007003352">8 800 700 33 52</a></p>
+                    <p><a href="mailto:mega@megatoys.pro">mega@megatoys.pro</a><a href="#">www.megatoys.pro</a></p>
+                </div>
+
+                <div class="footer-widget footer-widget-2 col-lg-3 col-md-6 col-12 mb-40">
+                    <h4 class="title">КОМПАНИЯ</h4>
+                    <ul>
+                        <li><a href="{% url 'show_about_us' %}">О КОМПАНИИ</a></li>
+                        <li><a href="{% url 'show_news' %}">ВЫСТАВКИ И НОВОСТИ</a></li>
+                        <li><a href="{% url 'show_manufacture' %}">ПРОИЗВОДСТВО</a></li>
+                        <li><a href="{% url 'show_certificate' %}">СЕРТИФИКАТЫ</a></li>
+                        <li><a href="{% url 'show_privacy_policy' %}">ПОЛИТИКА</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-widget footer-widget-2 col-lg-3 col-md-6 col-12 mb-40">
+                    <h4 class="title">ИНФОРМАЦИЯ</h4>
+                    <ul>
+                        <li><a href="{% url 'show_help' %}">ПОМОЩЬ</a></li>
+                        <li><a href="{% url 'show_payment' %}">УСЛОВИЯ ОПЛАТЫ</a></li>
+                        <li><a href="{% url 'show_delivery' %}">УСЛОВИЯ ДОСТАВКИ</a></li>
+                        <li><a href="{% url 'show_guarantee' %}">ГАРАНТИЯ НА ТОВАР</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-widget footer-widget-2 col-lg-3 col-md-6 col-12 mb-40">
+                    <h4 class="title">НОВОСТИ</h4>
+                    <p>Подпишитесь на нашу рассылку, и получайте актуальные акции раньше других!</p>
+
+                    <form id="mc-form" class="mc-form footer-subscribe-form" novalidate="true">
+                        <input id="mc-email" autocomplete="off" placeholder="E-mail" name="EMAIL" type="email">
+                        <button id="mc-submit"><i class="fa fa-paper-plane-o"></i></button>
+                    </form>
+                    <div class="mailchimp-alerts">
+                        <div class="mailchimp-submitting"></div>
+                        <div class="mailchimp-success"></div>
+                        <div class="mailchimp-error"></div>
+                    </div>
+
+                    <h5>МЫ В СОЦСЕТЯХ</h5> 
+                    <p class="footer-social"><a href="#">Facebook</a> - <a href="#">Twitter</a> - <a href="#">Google+</a></p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom-section section bg-theme-one pt-15 pb-15">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="footer-copyright">Copyright &copy; All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="{% static 'js/vendor/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/plugins.js' %}"></script>
+<script src="{% static 'js/ajax-mail.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

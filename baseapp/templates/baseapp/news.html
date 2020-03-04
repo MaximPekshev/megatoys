@@ -1,0 +1,13 @@
+{% extends 'baseapp/base.html' %}
+
+ {% block page_name %} Новости {% endblock  %}
+
+
+ {% block breadcrumb %} <li><a href="{% url 'show_news' %}"> Новости </a></li>{% endblock %}
+
+
+ {% block content %}
+
+    {{ block.super }}
+    
+ {% endblock %}

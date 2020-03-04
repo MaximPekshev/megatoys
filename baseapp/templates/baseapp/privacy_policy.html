@@ -1,0 +1,13 @@
+{% extends 'baseapp/base.html' %}
+
+ {% block page_name %} Политики {% endblock  %}
+
+
+ {% block breadcrumb %} <li><a href="{% url 'show_privacy_policy' %}"> Политики </a></li>{% endblock %}
+
+
+ {% block content %}
+
+    {{ block.super }}
+    
+ {% endblock %}

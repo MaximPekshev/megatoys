@@ -1,0 +1,60 @@
+ {% extends 'baseapp/base.html' %}
+
+ {% block page_name %} Регистрация/Авторизация {% endblock  %}
+
+
+ {% block breadcrumb %} <li><a href="{% url 'login_register' %}"> Регистрация/Авторизация </a></li>{% endblock %}
+
+
+ {% block content %}
+
+    {{ block.super }}
+
+    <div class="page-section section section-padding">
+        <div class="container">
+            <div class="row mbn-40">
+
+                <div class="col-lg-4 col-12 mb-40">
+                    <div class="login-register-form-wrap">
+                        <h3>Авторизация</h3>
+                        <form action="{% url 'login' %}" class="mb-30" method="POST">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 mb-15"><input name="username" type="text" placeholder="Username or Email"></div>
+                                <div class="col-12 mb-15"><input name="password" type="password" placeholder="Password"></div>
+                                <div class="col-12"><input type="submit" value="Войти"></div>
+                            </div>
+                        </form>
+                        {% for message in messages %}
+                        <h4 style="color: red" >{{ message }}</h4>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-12 mb-40 text-center">
+                    <span class="login-register-separator"></span>
+                </div>
+
+                <div class="col-lg-6 col-12 mb-40 ml-auto">
+                    <div class="login-register-form-wrap">
+                        <h3>Регистрация</h3>
+                        <form action="{% url 'registration' %}" method="POST">
+                        {% csrf_token %}    
+                            <div class="row">
+                                <div class="col-md-6 col-12 mb-15"><input name="userfirst_name" type="text" placeholder="Ваше имя"></div>
+                                <div class="col-md-6 col-12 mb-15"><input name="userlast_name" type="text" placeholder="Ваша фамилия"></div>
+                                <div class="col-md-6 col-12 mb-15"><input name="username" type="text" placeholder="User Name"></div>
+                                <div class="col-md-6 col-12 mb-15"><input name="userpassword" type="password" placeholder="Пароль"></div>
+                                <div class="col-md-6 col-12 mb-15"><input name="useremail" type="email" placeholder="Email"></div>
+                                <div class="col-md-6 col-12 mb-15"><input name="userpassword_2" type="password" placeholder="Подтверждение пароля"></div>
+                                <div class="col-md-6 col-12"><input type="submit" value="Зарегистрироваться"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}   
