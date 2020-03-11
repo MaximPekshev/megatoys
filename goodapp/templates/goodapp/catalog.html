@@ -1,0 +1,105 @@
+{% extends 'baseapp/base.html' %}
+
+ {% block page_name %} Каталог {% endblock  %}
+
+
+ {% block breadcrumb %} <li><a href="#"> Каталог </a></li>{% endblock %}
+
+
+ {% block content %}
+
+    {{ block.super }}
+    
+  <div class="page-section section section-padding">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-12">
+                </div>
+
+                {% for item in page_object.object_list %}
+
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
+
+                    <div class="product-item">
+                        <div class="product-inner">
+
+                            <div class="image">
+                                <img src="{{ item.image.image270.url }}" alt=""> 
+
+                                <div class="image-overlay"> 
+
+                                    <div class="action-buttons">
+                                        <form action="#" method="POST">
+                                            {% csrf_token %}
+                                            <input name="quantity" type="hidden" value="1">
+                                            <button type="submit">add to cart</button>
+                                        </form>
+                                        <form action="#" method=''>
+                                            <button type="submit">add to wishlist</button>
+                                        </form>
+                                        
+                                    </div>                                    
+                                </div>
+
+                            </div>
+
+                            <div class="content">
+
+                                <div class="content-left">
+
+                                    <h4 class="title mb-10"><a href="{% url 'show_good' slug=item.good.slug %}">{{ item.good }}</a></h4>
+
+
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <!-- <p>{{ item.good.description_ru|slice:":1" }}</p> -->
+
+
+                                    <h5 class="size">Size: <span>S</span><span>M</span><span>L</span><span>XL</span></h5>
+                                    <h5 class="color">Color: <span style="background-color: #ffb2b0"></span><span style="background-color: #0271bc"></span><span style="background-color: #efc87c"></span><span style="background-color: #00c183"></span></h5>
+
+                                </div>
+
+                                <div class="content-right">
+                                    <span class="price">{{ item.good.price }}</span></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+               
+                {% endfor %}
+                {% if is_paginated %}
+                <div class="col-12">
+                    <ul class="page-pagination">
+                        <li><a href="{{ prev_url }}"><i class="fa fa-angle-left"></i></a></li>
+
+                        {% for n in page_object.paginator.page_range %}
+                            {% if page_object.number == n %}
+                                <li class="active"><a href="?page={{ n }}">{{ n }}</a></li>
+                            {% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
+                            <li>
+                                <a href="?page={{ n }}">{{ n }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        <li><a href="{{ next_url }}"><i class="fa fa-angle-right"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            {% endif %}
+        </div>
+    </div>
+ {% endblock %}
