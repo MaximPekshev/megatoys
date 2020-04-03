@@ -1,13 +1,16 @@
 {% extends 'baseapp/base.html' %}
 
- {% block page_name %} Гарантия на товар {% endblock  %}
+{% block title %} Гарантия на товар {% endblock  %}
+
+{% block summ_of_cart %}
+{{ cart_summ }}
+{% endblock %}
+
+{% block breadcrumb %} <li><a href="{% url 'show_guarantee' %}"> Гарантия на товар </a></li>{% endblock %}
 
 
- {% block breadcrumb %} <li><a href="{% url 'show_guarantee' %}"> Гарантия на товар </a></li>{% endblock %}
+{% block content %}
 
+{{ block.super }}
 
- {% block content %}
-
-    {{ block.super }}
-    
- {% endblock %}
+{% endblock %}

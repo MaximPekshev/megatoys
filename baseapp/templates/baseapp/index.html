@@ -3,28 +3,24 @@
 {% load static %}
 
 {% block title %} 
-
+    "Манюня" - главная страница
 {% endblock %}
 
 {% block num_of_wishlist %}
-
 {% endblock %}
 
-{% block summ_of_order %}
-
+{% block summ_of_cart %}
+{{ cart_summ }}
 {% endblock %}
 
 {% block content %}
-    <!-- Hero Section Start -->
+
     <div class="hero-section section">
 
-        <!-- Hero Slider Start -->
         <div class="hero-slider hero-slider-one fix">
 
-            <!-- Hero Item Start -->
             <div class="hero-item" style="background-image: url({% static 'images/hero/hero-1.jpg' %})">
 
-                <!-- Hero Content -->
                 <div class="hero-content">
 
                     <h1>Get 35% off <br>Latest Baby Product</h1>
@@ -32,12 +28,11 @@
 
                 </div>
 
-            </div><!-- Hero Item End -->
+            </div>
 
-            <!-- Hero Item Start -->
             <div class="hero-item" style="background-image: url({% static 'images/hero/hero-2.jpg' %})">
 
-                <!-- Hero Content -->
+
                 <div class="hero-content">
 
                     <h1>Get 35% off <br>Latest Baby Product</h1>
@@ -45,14 +40,13 @@
 
                 </div>
 
-            </div><!-- Hero Item End -->
+            </div>
 
-        </div><!-- Hero Slider End -->
+        </div>
 
-    </div><!-- Hero Section End -->
+    </div>
 
 
-    <!-- Banner Section Start -->
     <div class="banner-section section mt-40">
         <div class="container-fluid">
             <div class="row row-10 mbn-20">

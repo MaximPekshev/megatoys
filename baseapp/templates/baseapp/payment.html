@@ -1,13 +1,16 @@
 {% extends 'baseapp/base.html' %}
 
- {% block page_name %} Условия оплаты {% endblock  %}
+{% block title %} Условия оплаты {% endblock  %}
+
+{% block summ_of_cart %}
+{{ cart_summ }}
+{% endblock %}
+
+{% block breadcrumb %} <li><a href="{% url 'show_payment' %}"> Условия оплаты </a></li>{% endblock %}
 
 
- {% block breadcrumb %} <li><a href="{% url 'show_payment' %}"> Условия оплаты </a></li>{% endblock %}
+{% block content %}
 
+{{ block.super }}
 
- {% block content %}
-
-    {{ block.super }}
-    
- {% endblock %}
+{% endblock %}

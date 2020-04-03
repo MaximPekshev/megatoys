@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from . models import Good
-from . models import Picture
+from .models import Good
+from .models import Picture
 from django.core.paginator import Paginator
+from cartapp.views import get_cart
 
 class Item(object):
 	
@@ -47,6 +48,7 @@ def show_catalog(request):
 	template_name = 'goodapp/catalog.html'
 	context = {
 		'page_object': page, 'prev_url': prev_url, 'next_url': next_url, 'is_paginated': is_paginated,
+		'cart_summ': (get_cart(request).summ if get_cart(request) else 0),
 	}
 	return render(request, template_name, context)
 
@@ -60,5 +62,6 @@ def show_good(request, slug):
 	template_name = 'goodapp/good.html'
 	context = {
 		'good': good, 'pictures': pictures, 'main_pictures': main_pictures,
+		'cart_summ': (get_cart(request).summ if get_cart(request) else 0),
 	}
 	return render(request, template_name, context)	

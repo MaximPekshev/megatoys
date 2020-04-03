@@ -1,13 +1,16 @@
 {% extends 'baseapp/base.html' %}
 
- {% block page_name %} Политики {% endblock  %}
+{% block title %} Политики {% endblock  %}
+
+{% block summ_of_cart %}
+{{ cart_summ }}
+{% endblock %}
+
+{% block breadcrumb %} <li><a href="{% url 'show_privacy_policy' %}"> Политики </a></li>{% endblock %}
 
 
- {% block breadcrumb %} <li><a href="{% url 'show_privacy_policy' %}"> Политики </a></li>{% endblock %}
+{% block content %}
 
+{{ block.super }}
 
- {% block content %}
-
-    {{ block.super }}
-    
- {% endblock %}
+{% endblock %}

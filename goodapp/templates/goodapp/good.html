@@ -1,6 +1,10 @@
 {% extends 'baseapp/base.html' %}
 
-{% block page_name %} Товар {% endblock  %}
+{% block title %} {{ good.name }} {% endblock  %}
+
+{% block summ_of_cart %}
+{{ cart_summ }}
+{% endblock %}
 
 {% block breadcrumb %} 
 
@@ -45,14 +49,6 @@
 
 									<h3 class="title">{{ good.name }}</h3>
 
-									<div class="ratting">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-half-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-
 								</div>
 
 								<div class="head-right">
@@ -61,43 +57,28 @@
 							</div>
 
 							<div class="description">
-								<p>{{ good.description_ru|slice:":255" }}</p>
+								<p>{{ good.description }}</p>
 							</div>
 
-							<span class="availability">Availability: <span>In Stock</span></span>
+							<span class="availability">Наличие: <span>{% if good.quantity > 0 %}В наличиии{% else %}Нет на складе {% endif %}</span></span>
 
-							<form id="quantityform" action="#" method="POST">
+							<form id="quantityform" action="{% url 'cart_add_item' slug=good.slug %}" method="POST">
 								{% csrf_token %}
 								<div class="quantity-colors">
 
 									<div class="quantity">
-										<h5>Quantity:</h5>
+										<h5>Количество:</h5>
 										<div class="pro-qty"><input name="quantity" type="text" value="1"></div>
 									</div>                            
-
 
 								</div>
 							</form>    
 							<div class="actions">
 
-								<button form="quantityform" type="submit"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></button>
+								<button form="quantityform" type="submit"><i class="ti-shopping-cart"></i><span>В КОРЗИНУ</span></button>
 								<form action="#">
-									<!-- <button class="box" data-tooltip="Compare"><i class="ti-control-shuffle"></i></button> -->
 									<button class="box" data-tooltip="Wishlist"><i class="ti-heart"></i></button>
 								</form>
-							</div>
-
-
-
-							<div class="tags">
-
-								<h5>Tags:</h5>
-								<a href="#">Electronic</a>
-								<a href="#">Smartphone</a>
-								<a href="#">Phone</a>
-								<a href="#">Charger</a>
-								<a href="#">Powerbank</a>
-
 							</div>
 
 							<div class="share">
@@ -113,42 +94,6 @@
 						</div>
 					</div>
 
-				</div>
-
-				<div class="row mb-50">
-					<div class="col-12">
-						<ul class="pro-info-tab-list section nav">
-							<li><a class="active" href="#more-info" data-toggle="tab">More info</a></li>
-							<li><a href="#data-sheet" data-toggle="tab">Data sheet</a></li>
-							<li><a href="#reviews" data-toggle="tab">Reviews</a></li>
-						</ul>
-					</div>
-					<div class="tab-content col-12">
-						<div class="pro-info-tab tab-pane active" id="more-info">
-							<p>{{ good.description }}</p>
-						</div>
-						<div class="pro-info-tab tab-pane" id="data-sheet">
-							<table class="table-data-sheet">
-								<tbody>
-									<tr class="odd">
-										<td>Compositions</td>
-										<td>Cotton</td>
-									</tr>
-									<tr class="even">
-										<td>Styles</td>
-										<td>Casual</td>
-									</tr>
-									<tr class="odd">
-										<td>Properties</td>
-										<td>Short Sleeve</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="pro-info-tab tab-pane" id="reviews">
-							<a href="#">Be the first to write your review!</a>
-						</div>
-					</div>
 				</div>
 
 			</div>

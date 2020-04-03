@@ -1,0 +1,92 @@
+{% extends 'baseapp/base.html' %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block summ_of_cart %}
+{{ cart_summ }}
+{% endblock %}
+
+{% block breadcrumb %} <li><a href="{% url 'show_cart' %}"> Корзина </a></li>{% endblock %}
+
+
+{% block content %}
+	{{ block.super }}
+{% if cart_items %}
+<div class="page-section section section-padding">
+	<div class="container">
+		<form action="#">				
+			<div class="row mbn-40">
+				<div class="col-12 mb-40">
+					<div class="cart-table table-responsive">
+						<table>
+							<thead>
+								<tr>
+									<th class="pro-thumbnail">Изображение</th>
+									<th class="pro-title">Наименование</th>
+									<th class="pro-price">Цена</th>
+									<th class="pro-quantity">Количество</th>
+									<th class="pro-subtotal">Сумма</th>
+									<th class="pro-remove">Удалить</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for item in cart_items %}
+								<tr>
+									<td class="pro-thumbnail"><a href="{% url 'show_good' slug=item.good.slug %}"><img src="{{ item.image.image270.url }}" alt=""></a></td>
+									<td class="pro-title"><a href="{% url 'show_good' slug=item.good.slug %}">{{ item.good }}</a></td>
+									<td class="pro-price"><span class="amount">&#8381 {{ item.good.price }}</span></td>
+									<td class="pro-quantity"><div class="pro-qty"><input type="text" value="{{ item.quantity }}"></div></td>
+									<td class="pro-subtotal">&#8381 {{ item.summ }}</td>
+									<td class="pro-remove"><a href="{% url 'cart_del_item' slug=item.good.slug %}">×</a></td>
+								</tr>
+							{% endfor %}	
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-7 col-12 mb-40">
+					<div class="cart-buttons mb-30">
+						<input type="submit" value="Обновить корзину" />
+						<a href="{% url 'show_catalog' %}">Продолжить покупки</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-5 col-12 mb-40">
+					<div class="cart-total fix">
+						<h3>Итого</h3>
+						<table>
+							<tbody>
+								<tr class="order-total">
+									<td>
+										<strong><span class="amount">&#8381 {{ cart_summ }}</span></strong>
+									</td>
+								</tr>											
+							</tbody>
+						</table>
+						<div class="proceed-to-checkout section mt-30">
+							<a href="#">Перейти к оформлению</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</div>
+{% else %}
+<div class="page-section section section-padding">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-lg-6 col-md-8 col-12 mx-auto">
+				<div class="error-404">
+					<h2>Ваша корзина пуста</h2>
+					<p></p>
+					<a href="{% url 'show_index' %}" class="back-btn">На главную</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

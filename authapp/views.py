@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts 				import render, redirect
 
 from django.http 					import HttpResponseRedirect
 
@@ -10,13 +10,13 @@ from django.contrib		 			import auth
 from .forms 						import RegistrationForm
 from authapp.models 				import Buyer
 
+from cartapp.views 					import get_cart
 
 def show_account(request):
 	
 	if request.user.is_authenticated:
-		context = {
 
-		}
+		context = {'cart_summ': (get_cart(request).summ if get_cart(request) else 0),}
 
 		template_name = 'authapp/profile.html'
 
@@ -24,7 +24,7 @@ def show_account(request):
 		
 		if buyer is not None:
 			
-			context.update({'buyer': buyer})
+			context.append({'buyer': buyer})
 
 		return render(request, template_name, context)
 	else:
@@ -33,10 +33,11 @@ def show_account(request):
 
 def login_register(request):
 
+	context = {'cart_summ': (get_cart(request).summ if get_cart(request) else 0),}
 
 	template_name = 'authapp/login_register.html'
 	
-	return render(request, template_name)
+	return render(request, template_name, context)
 
 def login(request):
 

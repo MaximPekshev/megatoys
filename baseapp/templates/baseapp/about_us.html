@@ -1,13 +1,14 @@
 {% extends 'baseapp/base.html' %}
 
- {% block page_name %} О компании {% endblock  %}
+{% block title %} О компании {% endblock  %}
+
+{% block summ_of_cart %}
+{{ cart_summ }}
+{% endblock %}
+
+{% block breadcrumb %} <li><a href="{% url 'show_about_us' %}"> О компании </a></li>{% endblock %}
 
 
- {% block breadcrumb %} <li><a href="{% url 'show_about_us' %}"> О компании </a></li>{% endblock %}
-
-
- {% block content %}
-
-    {{ block.super }}
-    
- {% endblock %}   
+{% block content %}
+{{ block.super }}
+{% endblock %}  

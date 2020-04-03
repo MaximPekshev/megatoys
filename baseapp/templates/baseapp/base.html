@@ -76,22 +76,12 @@
                     <div class="col order-2 order-lg-3">
                         <div class="header-shop-links">
 
-                            <div class="header-search">
-                                <button class="search-toggle"><img src="{% static 'images/icons/search.png' %}" alt="Search Toggle"><img class="toggle-close" src="{% static 'images/icons/close.png' %}" alt="Search Toggle"></button>
-                                <div class="header-search-wrap">
-                                    <form action="#">
-                                        <input type="text" placeholder="Type and hit enter">
-                                        <button><img src="{% static 'images/icons/search.png' %}" alt="Search"></button>
-                                    </form>
-                                </div>
-                            </div>
-
                             <div class="header-wishlist">
                                 <a href="#"><img src="{% static 'images/icons/wishlist.png' %}" alt="Wishlist"> <span>{% block num_of_wishlist %} {% endblock %}</span></a>
                             </div>
 
                             <div class="header-mini-cart">
-                                <a href="#"><img src="{% static 'images/icons/cart.png' %}" alt="Cart"> <span>{% block summ_of_order %} {% endblock %}</span></a>
+                                <a href="{% url 'show_cart' %}"><img src="{% static 'images/icons/cart.png' %}" alt="Cart"> <span>{% block summ_of_cart %}{% endblock %}</span></a>
                             </div>
 
                         </div>
@@ -131,7 +121,7 @@
 
                 </div>
             </div>
-        </div><
+        </div>
     </div>
 
     {% block content %}
