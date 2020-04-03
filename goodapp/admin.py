@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Good
-from .models import Picture
-
+from .models import Good, Picture
 
 
 class PictureInline(admin.TabularInline):
